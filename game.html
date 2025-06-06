@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Game Pembelajaran Sederhana</title>
+    <style>
+      :root {
+        --primary-color: #3a86ff;
+        --secondary-color: #ffbe0b;
+        --background-color: #f0f4f8;
+        --text-color: #212529;
+        --correct-color: #06d6a0;
+        --wrong-color: #ef476f;
+      }
+      body {
+        margin: 0;
+        font-family: "Poppins", sans-serif, Arial, sans-serif;
+        background: var(--background-color);
+        color: var(--text-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 20px;
+      }
+      #game {
+        background: #fff;
+        max-width: 480px;
+        width: 100%;
+        padding: 24px 32px;
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+      h1 {
+        margin-bottom: 0.5em;
+        color: var(--primary-color);
+      }
+      #question {
+        font-size: 1.3rem;
+        margin-bottom: 1em;
+      }
+      .answer-btn {
+        display: block;
+        background: var(--primary-color);
+        border: none;
+        color: white;
+        font-size: 1.1rem;
+        padding: 14px 20px;
+        margin: 10px 0;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      .answer-btn:hover {
+        background: var(--secondary-color);
+        color: var(--text-color);
+      }
+      .answer-btn.correct {
+        background-color: var(--correct-color);
+        color: white;
+        cursor: default;
+      }
+      .answer-btn.wrong {
+        background-color: var(--wrong-color);
+        color: white;
+        cursor: default;
+      }
+      #feedback {
+        font-weight: 600;
+        margin: 1em 0;
+        min-height: 1.4em;
+      }
+      #score {
+        font-size: 1.2rem;
+        margin-top: 1.2em;
+        font-weight: 700;
+      }
+      #restart {
+        margin-top: 1.5em;
+        padding: 12px 24px;
+        font-size: 1.1rem;
+        background: var(--primary-color);
+        border: none;
+        border-radius: 12px;
+        color: white;
+        cursor: pointer;
+        width: 100%;
+        transition: background-color 0.3s ease;
+      }
+      #restart:hover {
+        background: var(--secondary-color);
+        color: var(--text-color);
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="game"
+      role="main"
+      aria-live="polite"
+      aria-label="Game pembelajaran kuis interaktif"
+    >
+      <h1>Kuis buat manasin otak der</h1>
+      <div id="question" aria-atomic="true"></div>
+      <div id="answers"></div>
+      <div id="feedback" aria-live="assertive"></div>
+      <div id="score" aria-atomic="true"></div>
+      <button id="restart" hidden>Ulangi Game</button>
+    </div>
+
+    <script>
+      (function () {
+        const questions = [
+          {
+            question: "Apa ibu kota Indonesia?",
+            answers: [
+              { text: "Jakarta", correct: true },
+              { text: "Bandung", correct: false },
+              { text: "Surabaya", correct: false },
+              { text: "Medan", correct: false },
+            ],
+          },
+          {
+            question: "Berapa hasil dari 7 x 6?",
+            answers: [
+              { text: "42", correct: true },
+              { text: "36", correct: false },
+              { text: "48", correct: false },
+              { text: "40", correct: false },
+            ],
+          },
+          {
+            question: "Siapa penemu lampu pijar?",
+            answers: [
+              { text: "Thomas Edison", correct: true },
+              { text: "Alexander Graham Bell", correct: false },
+              { text: "Nikola Tesla", correct: false },
+              { text: "Isaac Newton", correct: false },
+            ],
+          },
+          {
+            question: "Planet terbesar di tata surya kita?",
+            answers: [
+              { text: "Jupiter", correct: true },
+              { text: "Mars", correct: false },
+              { text: "Bumi", correct: false },
+              { text: "Saturnus", correct: false },
+            ],
+          },
+          {
+            question: "Bahasa pemrograman yang sering digunakan untuk web?",
+            answers: [
+              { text: "JavaScript", correct: true },
+              { text: "Python", correct: false },
+              { text: "Ruby", correct: false },
+              { text: "C++", correct: false },
+            ],
+          },
+        ];
+
+        const questionElem = document.getElementById("question");
+        const answersElem = document.getElementById("answers");
+        const feedbackElem = document.getElementById("feedback");
+        const scoreElem = document.getElementById("score");
+        const restartBtn = document.getElementById("restart");
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let answered = false;
+
+        function startGame() {
+          currentQuestionIndex = 0;
+          score = 0;
+          answered = false;
+          scoreElem.textContent = "";
+          feedbackElem.textContent = "";
+          restartBtn.hidden = true;
+          showQuestion();
+        }
+
+        function showQuestion() {
+          answered = false;
+          const currentQ = questions[currentQuestionIndex];
+          questionElem.textContent = `Pertanyaan ${currentQuestionIndex + 1}: ${
+            currentQ.question
+          }`;
+          answersElem.innerHTML = "";
+          feedbackElem.textContent = "";
+
+          currentQ.answers.forEach((ans, index) => {
+            const btn = document.createElement("button");
+            btn.textContent = ans.text;
+            btn.className = "answer-btn";
+            btn.setAttribute("aria-pressed", "false");
+            btn.onclick = () => selectAnswer(btn, ans.correct);
+            btn.disabled = false;
+            answersElem.appendChild(btn);
+          });
+        }
+
+        function selectAnswer(button, correct) {
+          if (answered) return;
+          answered = true;
+          if (correct) {
+            button.classList.add("correct");
+            feedbackElem.textContent = "Jawaban benar! 👍";
+            score++;
+          } else {
+            button.classList.add("wrong");
+            feedbackElem.textContent = "Jawaban salah. Coba yang lain.";
+          }
+          disableAnswers();
+          setTimeout(nextQuestion, 1500);
+        }
+
+        function disableAnswers() {
+          const buttons = answersElem.querySelectorAll("button");
+          buttons.forEach((btn) => {
+            btn.disabled = true;
+            btn.setAttribute("aria-pressed", "true");
+          });
+        }
+
+        function nextQuestion() {
+          currentQuestionIndex++;
+          if (currentQuestionIndex >= questions.length) {
+            endGame();
+          } else {
+            showQuestion();
+          }
+        }
+
+        function endGame() {
+          questionElem.textContent = "Game selesai!";
+          answersElem.innerHTML = "";
+          feedbackElem.textContent = "";
+          scoreElem.textContent = `Skor Anda: ${score} dari ${questions.length} 🎉`;
+          restartBtn.hidden = false;
+        }
+
+        restartBtn.addEventListener("click", startGame);
+
+        startGame();
+      })();
+    </script>
+  </body>
+</html>

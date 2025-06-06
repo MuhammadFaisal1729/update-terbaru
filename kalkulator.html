@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Matematika - Materi Turunan</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+
+      :root {
+        --primary-color: #4f46e5;
+        --primary-light: #6366f1;
+        --secondary-color: #10b981;
+        --background-color: #f9fafb;
+        --text-color: #1e293b;
+        --header-bg: #4338ca;
+        --header-text: #f9fafb;
+        --code-bg: #e0e7ff;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: var(--background-color);
+        color: var(--text-color);
+        line-height: 1.6;
+      }
+
+      header {
+        background-color: var(--header-bg);
+        color: var(--header-text);
+        padding: 1.5rem 2rem;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      header h1 {
+        margin: 0;
+        font-weight: 600;
+        font-size: 2.2rem;
+        letter-spacing: 1px;
+      }
+
+      main {
+        max-width: 900px;
+        margin: 2rem auto 4rem auto;
+        padding: 0 1rem;
+      }
+
+      section {
+        margin-bottom: 3rem;
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 10px 20px -8px rgba(79, 70, 229, 0.3);
+        transition: transform 0.3s ease;
+      }
+
+      section:hover {
+        transform: translateY(-5px);
+      }
+
+      h2 {
+        color: var(--primary-color);
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        font-weight: 600;
+      }
+
+      p {
+        margin-bottom: 1rem;
+        font-size: 1.05rem;
+      }
+
+      ul {
+        padding-left: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      ul li {
+        margin-bottom: 0.5rem;
+        font-size: 1.05rem;
+      }
+
+      code {
+        background-color: var(--code-bg);
+        color: #4338ca;
+        padding: 0.2rem 0.5rem;
+        font-family: "Courier New", Courier, monospace;
+        border-radius: 5px;
+        font-weight: 600;
+      }
+
+      .example {
+        background: #eef2ff;
+        border-left: 4px solid var(--primary-color);
+        padding: 1rem 1.5rem;
+        margin: 1.5rem 0;
+        border-radius: 8px;
+        font-size: 1.05rem;
+        font-style: italic;
+        color: #4338ca;
+      }
+
+      /* Derivative calculator styles */
+      .calculator {
+        background-color: #f3f4f6;
+        padding: 1.5rem;
+        border-radius: 10px;
+        box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.05);
+      }
+
+      .calculator label {
+        font-weight: 600;
+        display: block;
+        margin-bottom: 0.5rem;
+        font-size: 1.1rem;
+      }
+
+      .calculator input[type="text"] {
+        width: 100%;
+        padding: 0.6rem;
+        font-size: 1.05rem;
+        border: 2px solid var(--primary-light);
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        outline-color: var(--primary-color);
+        font-family: "Courier New", Courier, monospace;
+      }
+
+      .calculator button {
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        padding: 0.7rem 1.5rem;
+        font-weight: 600;
+        font-size: 1rem;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .calculator button:hover {
+        background-color: var(--primary-light);
+      }
+
+      .result {
+        margin-top: 1rem;
+        font-weight: 600;
+        font-size: 1.2rem;
+        color: var(--secondary-color);
+        min-height: 1.5rem;
+      }
+
+      footer {
+        text-align: center;
+        padding: 1rem 2rem;
+        color: #64748b;
+        font-size: 0.9rem;
+        border-top: 1px solid #cbd5e1;
+      }
+
+      @media (max-width: 600px) {
+        header h1 {
+          font-size: 1.6rem;
+        }
+        main {
+          margin: 1.5rem 1rem 3rem 1rem;
+        }
+        section {
+          padding: 1.5rem 1.2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Kalkulator Matematika: Turunan</h1>
+    </header>
+    <main>
+      <section>
+        <h2>Apa itu Turunan?</h2>
+        <p>
+          Turunan adalah konsep fundamental dalam kalkulus yang menggambarkan
+          bagaimana sebuah fungsi berubah pada titik tertentu. Turunan suatu
+          fungsi pada suatu titik dapat diartikan sebagai laju perubahan nilai
+          fungsi terhadap perubahan variabelnya di titik tersebut.
+        </p>
+        <p>
+          Secara sederhana, turunan menunjukkan kemiringan garis singgung pada
+          grafik fungsi di suatu titik.
+        </p>
+      </section>
+
+      <section>
+        <h2>Kalkulator Turunan Sederhana</h2>
+        <p>
+          Masukkan fungsi polinomial sederhana dalam bentuk
+          <code>ax^n + bx^m + ...</code> (contoh: 3x^4 + 2x^3 - x + 5).
+          Kalkulator akan menghitung turunannya.
+        </p>
+        <div class="calculator">
+          <label for="input-func">Fungsi f(x):</label>
+          <input
+            type="text"
+            id="input-func"
+            placeholder="Contoh: 3x^4 + 2x^3 - x + 5"
+          />
+          <button id="btn-derive">Hitung Turunan</button>
+          <div class="result" id="result-derive"></div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      &copy; 2025 Materi Matematika Turunan - dibuat oleh Muhammad Faisal
+    </footer>
+
+    <script>
+      // Simple derivative calculator for polynomial terms only
+      // Supports + and - signs, terms with format ax^n or ax or c (constants)
+      // Assumes input is valid polynomial in x
+
+      function parseTerm(term) {
+        term = term.trim();
+        // Match coefficient and power: optional sign, number, x, optional ^power
+        // Examples:
+        // 3x^4, -2x^3, x^2, -x, 4
+        let regex = /^([+-]?)(\d*\.?\d*)?x?(\^(\d+))?$/;
+        let match = term.match(regex);
+        if (!match) return null;
+
+        let sign = match[1] === "-" ? -1 : 1;
+        let coeff = match[2] || "";
+        if (coeff === "") coeff = term.includes("x") ? 1 : 0;
+        coeff = parseFloat(coeff) * sign;
+
+        let power = match[4] ? parseInt(match[4]) : term.includes("x") ? 1 : 0;
+
+        return { coeff, power };
+      }
+
+      function derivativeTerm({ coeff, power }) {
+        if (power === 0) {
+          return null; // derivative of constant is 0
+        }
+        let newCoeff = coeff * power;
+        let newPower = power - 1;
+
+        let coeffStr;
+        if (newCoeff === 1 && newPower !== 0) coeffStr = "";
+        else if (newCoeff === -1 && newPower !== 0) coeffStr = "-";
+        else coeffStr = newCoeff.toString();
+
+        if (newPower === 0) {
+          return coeffStr;
+        } else if (newPower === 1) {
+          return coeffStr + "x";
+        } else {
+          return coeffStr + "x^" + newPower;
+        }
+      }
+
+      function calculateDerivative(input) {
+        if (!input) return "";
+
+        // Normalize input spacing
+        input = input.replace(/−/g, "-").replace(/\s+/g, "");
+
+        // Separate terms by + or - sign, keeping signs with terms
+        // Insert + at start if missing for uniform splitting
+        if (input[0] !== "+" && input[0] !== "-") {
+          input = "+" + input;
+        }
+
+        let terms = input.match(/[+-][^+-]+/g);
+        if (!terms) return "";
+
+        let derivedTerms = [];
+        for (let term of terms) {
+          let parsed = parseTerm(term);
+          if (!parsed) continue;
+
+          let derived = derivativeTerm(parsed);
+          if (derived === null) continue;
+
+          if (derived[0] !== "-" && derivedTerms.length > 0) {
+            derived = "+" + derived;
+          }
+          derivedTerms.push(derived);
+        }
+        if (derivedTerms.length === 0) return "0";
+
+        let result = derivedTerms.join("");
+        // Remove starting + if any
+        if (result[0] === "+") result = result.substring(1);
+        return result;
+      }
+
+      document.getElementById("btn-derive").addEventListener("click", () => {
+        const input = document.getElementById("input-func").value;
+        const result = calculateDerivative(input);
+        const resultDiv = document.getElementById("result-derive");
+        if (!result) {
+          resultDiv.textContent = "Masukkan fungsi polinomial yang valid.";
+          resultDiv.style.color = "red";
+        } else {
+          resultDiv.textContent = "Turunan: " + result;
+          resultDiv.style.color = "var(--secondary-color)";
+        }
+      });
+    </script>
+  </body>
+</html>

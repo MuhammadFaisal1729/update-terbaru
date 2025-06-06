@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>faisal</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --color-primary: #6a11cb;
+        --color-secondary: #2575fc;
+        --color-light: #f0f0f7;
+        --color-dark: #1a202c;
+        --font-family: "Poppins", sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: var(--font-family);
+        background: var(--color-light);
+        color: var(--color-dark);
+        line-height: 1.6;
+        scroll-behavior: smooth;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      header {
+        position: fixed;
+        width: 100%;
+        background: white;
+        box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+        z-index: 1000;
+      }
+      nav {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .logo {
+        font-weight: 700;
+        font-size: 1.5rem;
+        background: linear-gradient(
+          45deg,
+          var(--color-primary),
+          var(--color-secondary)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        cursor: default;
+      }
+      nav ul {
+        list-style: none;
+        display: flex;
+        gap: 1.8rem;
+      }
+      nav ul li {
+        font-weight: 600;
+        font-size: 1rem;
+        color: var(--color-dark);
+        cursor: pointer;
+        position: relative;
+        padding-bottom: 4px;
+        transition: color 0.3s ease;
+      }
+      nav ul li::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background: var(--color-primary);
+        transition: width 0.3s ease;
+        border-radius: 2px;
+      }
+      nav ul li:hover,
+      nav ul li:focus {
+        color: var(--color-primary);
+      }
+      nav ul li:hover::after,
+      nav ul li:focus::after {
+        width: 100%;
+      }
+      main {
+        margin-top: 80px;
+      }
+      .hero {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 90vh;
+        max-width: 1100px;
+        margin: auto;
+        padding: 0 2rem;
+        text-align: center;
+        background: linear-gradient(
+          135deg,
+          var(--color-primary),
+          var(--color-secondary)
+        );
+        color: white;
+        border-radius: 20px;
+        box-shadow: 0 15px 40px rgb(101 64 233 / 0.4);
+        position: relative;
+        overflow: hidden;
+      }
+      .hero h1 {
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        line-height: 1.1;
+        text-shadow: 0 3px 6px rgb(0 0 0 / 0.3);
+      }
+      .hero p {
+        font-size: 1.3rem;
+        margin-bottom: 2rem;
+        font-weight: 500;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        text-shadow: 0 2px 6px rgb(0 0 0 / 0.25);
+      }
+      .btn-primary {
+        display: inline-block;
+        background: white;
+        color: var(--color-primary);
+        font-weight: 700;
+        padding: 0.9rem 2.4rem;
+        font-size: 1.15rem;
+        border-radius: 50px;
+        box-shadow: 0 8px 15px rgb(255 255 255 / 0.5);
+        transition: background-color 0.3s ease, color 0.3s ease,
+          box-shadow 0.3s ease;
+        cursor: pointer;
+        user-select: none;
+        border: none;
+      }
+      .btn-primary:hover,
+      .btn-primary:focus {
+        background: #d4cbff;
+        color: var(--color-secondary);
+        box-shadow: 0 12px 24px rgb(101 64 233 / 0.7);
+        outline: none;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav role="navigation" aria-label="Main Navigation">
+        <div class="logo" aria-label="Website Logo">Ical Math</div>
+        <ul>
+          <li tabindex="0"><a href="buatakun.html">Buat Akun</a></li>
+          <li tabindex="0"><a href="index.html">About</a></li>
+          <li tabindex="0"><a href="index.html">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" aria-label="Website Introduction">
+        <h1>WELCOME</h1>
+        <p>JANGAN LAMA LAMA LANGSUNG AE KITA MULAI DER.</p>
+        <a href="mtk.html"
+          ><button
+            class="btn-primary"
+            aria-label="Get Started Button"
+            id="getStartedBtn"
+          >
+            MULAI SEKARANG
+          </button></a
+        >
+      </section>
+    </main>
+  </body>
+</html>

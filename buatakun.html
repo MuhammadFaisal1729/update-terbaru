@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Create Your Account - AwesomeSite</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --color-primary: #6a11cb;
+        --color-secondary: #2575fc;
+        --color-light: #f9fafb;
+        --color-dark: #1a202c;
+        --font-family: "Poppins", sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: var(--font-family);
+        background: var(--color-light);
+        color: var(--color-dark);
+        display: flex;
+        min-height: 100vh;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      .container {
+        background: white;
+        max-width: 420px;
+        width: 100%;
+        padding: 2.5rem 3rem;
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(101, 64, 233, 0.15);
+      }
+      h1 {
+        margin-bottom: 1.2rem;
+        font-weight: 600;
+        font-size: 2rem;
+        color: var(--color-primary);
+        text-align: center;
+      }
+      p.subtitle {
+        margin-bottom: 2rem;
+        color: #4a5568;
+        font-size: 1rem;
+        text-align: center;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+      }
+      label {
+        font-weight: 600;
+        font-size: 0.95rem;
+        margin-bottom: 0.3rem;
+        display: block;
+        color: var(--color-dark);
+      }
+      input[type="text"],
+      input[type="email"],
+      input[type="password"] {
+        padding: 0.8rem 1rem;
+        font-size: 1rem;
+        border-radius: 10px;
+        border: 1.8px solid #cbd5e1;
+        transition: border-color 0.3s ease;
+        width: 100%;
+      }
+      input[type="text"]:focus,
+      input[type="email"]:focus,
+      input[type="password"]:focus {
+        outline: none;
+        border-color: var(--color-primary);
+        box-shadow: 0 0 8px var(--color-primary);
+      }
+      .btn-submit {
+        margin-top: 1.5rem;
+        background: var(--color-primary);
+        color: white;
+        padding: 1rem;
+        font-weight: 700;
+        font-size: 1.1rem;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: background-color 0.35s ease;
+        box-shadow: 0 8px 20px rgba(101, 64, 233, 0.5);
+      }
+      .btn-submit:hover,
+      .btn-submit:focus {
+        background: var(--color-secondary);
+        outline: none;
+        box-shadow: 0 12px 30px rgba(37, 117, 252, 0.7);
+      }
+      .footer-text {
+        margin-top: 1.8rem;
+        font-size: 0.9rem;
+        color: #64748b;
+        text-align: center;
+      }
+      .footer-text a {
+        color: var(--color-primary);
+        text-decoration: none;
+        font-weight: 600;
+      }
+      .footer-text a:hover,
+      .footer-text a:focus {
+        text-decoration: underline;
+        outline: none;
+      }
+      .success-message {
+        margin-top: 1rem;
+        color: #10b981;
+        font-weight: 600;
+        text-align: center;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container" role="main" aria-label="Create Your Account Form">
+      <h1>DAFTAR UNTUK MENJADI WARGA JAWA</h1>
+      <p class="subtitle">
+        Join Ical Math today! Fill in your details below to get started. .
+      </p>
+      <form id="accountForm" novalidate>
+        <label for="fullName">Full Name</label>
+        <input
+          type="text"
+          id="fullName"
+          name="fullName"
+          placeholder="Your full name"
+          required
+          aria-required="true"
+          aria-describedby="fullNameError"
+        />
+        <div
+          id="fullNameError"
+          class="error-message"
+          style="color: #dc2626; font-size: 0.85rem; display: none"
+        >
+          Please enter your full name.
+        </div>
+
+        <label for="email">Email Address</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="you@example.com"
+          required
+          aria-required="true"
+          aria-describedby="emailError"
+        />
+        <div
+          id="emailError"
+          class="error-message"
+          style="color: #dc2626; font-size: 0.85rem; display: none"
+        >
+          Please enter a valid email address.
+        </div>
+
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="At least 6 characters"
+          minlength="6"
+          required
+          aria-required="true"
+          aria-describedby="passwordError"
+        />
+        <div
+          id="passwordError"
+          class="error-message"
+          style="color: #dc2626; font-size: 0.85rem; display: none"
+        >
+          Password must be at least 6 characters.
+        </div>
+
+        <button type="submit" class="btn-submit" aria-label="Create Account">
+          Create Account
+        </button>
+      </form>
+      <div
+        class="success-message"
+        id="successMessage"
+        role="alert"
+        aria-live="polite"
+      ></div>
+      <p class="footer-text">
+        Already have an account?
+        <a href="#" tabindex="0">Log in here</a>
+      </p>
+    </div>
+
+    <script>
+      const form = document.getElementById("accountForm");
+      const fullNameInput = document.getElementById("fullName");
+      const emailInput = document.getElementById("email");
+      const passwordInput = document.getElementById("password");
+
+      const fullNameError = document.getElementById("fullNameError");
+      const emailError = document.getElementById("emailError");
+      const passwordError = document.getElementById("passwordError");
+      const successMessage = document.getElementById("successMessage");
+
+      function validateEmail(email) {
+        // simple email regex
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+      }
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        let valid = true;
+        successMessage.style.display = "none";
+        successMessage.textContent = "";
+
+        // Validate Full Name
+        if (fullNameInput.value.trim() === "") {
+          fullNameError.style.display = "block";
+          valid = false;
+        } else {
+          fullNameError.style.display = "none";
+        }
+
+        // Validate Email
+        if (!validateEmail(emailInput.value.trim())) {
+          emailError.style.display = "block";
+          valid = false;
+        } else {
+          emailError.style.display = "none";
+        }
+
+        // Validate Password
+        if (passwordInput.value.length < 6) {
+          passwordError.style.display = "block";
+          valid = false;
+        } else {
+          passwordError.style.display = "none";
+        }
+
+        if (valid) {
+          // Simulate account creation success
+          successMessage.textContent =
+            "Account successfully created! Welcome to AwesomeSite.";
+          successMessage.style.display = "block";
+
+          // Clear form fields
+          form.reset();
+        }
+      });
+    </script>
+  </body>
+</html>

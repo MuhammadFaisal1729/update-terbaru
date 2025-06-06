@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Answer Collector with Image Upload and Password Protection</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@600;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --color-bg: #ffffff;
+        --color-text: #6b7280;
+        --color-heading: #111827;
+        --color-primary: #000000;
+        --color-primary-hover: #333333;
+        --border-radius: 0.75rem;
+        --shadow-light: rgba(0, 0, 0, 0.06);
+        --font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        --transition-speed: 0.3s;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: var(--color-bg);
+        font-family: var(--font-sans);
+        color: var(--color-text);
+        line-height: 1.5;
+        font-size: 18px;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      .container {
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+      /* Header */
+      header {
+        position: sticky;
+        top: 0;
+        background: var(--color-bg);
+        border-bottom: 1px solid #e5e7eb;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        box-shadow: 0 2px 4px var(--shadow-light);
+        z-index: 100;
+      }
+      nav.container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .logo {
+        font-weight: 800;
+        font-size: 1.5rem;
+        color: var(--color-primary);
+        letter-spacing: 0.05em;
+        user-select: none;
+      }
+      .nav-links {
+        display: flex;
+        gap: 1.5rem;
+      }
+      .nav-links a {
+        font-weight: 600;
+        font-size: 1rem;
+        color: var(--color-text);
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.375rem;
+        transition: background-color var(--transition-speed),
+          color var(--transition-speed);
+      }
+      .nav-links a:hover,
+      .nav-links a:focus-visible {
+        color: var(--color-primary);
+        background-color: #f3f4f6;
+        outline-offset: 2px;
+        outline: 2px solid var(--color-primary);
+        border-radius: 0.375rem;
+      }
+
+      /* Main Content */
+      main {
+        padding-bottom: 6rem;
+        display: flex;
+        justify-content: center;
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+      form.answer-form {
+        background: #f9fafb;
+        padding: 2.5rem 3rem;
+        border-radius: var(--border-radius);
+        max-width: 700px;
+        width: 100%;
+        box-shadow: 0 8px 24px var(--shadow-light);
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        box-sizing: border-box;
+      }
+      form.answer-form label {
+        font-weight: 600;
+        color: var(--color-heading);
+        font-size: 1.125rem;
+        margin-bottom: 0.5rem;
+        user-select: none;
+      }
+      form.answer-form input[type="file"] {
+        font-size: 1rem;
+        padding: 0.5rem 0.75rem;
+        font-family: var(--font-sans);
+        color: var(--color-heading);
+        border-radius: 0.5rem;
+        border: 1px solid #d1d5db;
+        transition: border-color var(--transition-speed),
+          box-shadow var(--transition-speed);
+      }
+      form.answer-form input[type="file"]:focus {
+        outline: none;
+        border-color: var(--color-primary);
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+      }
+      form.answer-form button {
+        font-weight: 700;
+        font-size: 1.25rem;
+        padding: 1rem 2.5rem;
+        background-color: var(--color-primary);
+        color: #fff;
+        border: none;
+        border-radius: var(--border-radius);
+        cursor: pointer;
+        align-self: flex-start;
+        transition: background-color var(--transition-speed),
+          transform var(--transition-speed);
+        user-select: none;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+      }
+      form.answer-form button:hover,
+      form.answer-form button:focus-visible {
+        background-color: var(--color-primary-hover);
+        transform: scale(1.05);
+        outline: none;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+      /* Answer list and container */
+      .section-container {
+        max-width: 720px;
+        margin: 0 auto 4rem auto;
+        background: #f9fafb;
+        border-radius: var(--border-radius);
+        box-shadow: 0 8px 24px var(--shadow-light);
+        padding: 2rem 2.5rem;
+        box-sizing: border-box;
+      }
+      .answers-section h2,
+      .password-section h2 {
+        font-weight: 700;
+        font-size: 2rem;
+        color: var(--color-heading);
+        margin-bottom: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .answer-clear-button {
+        font-weight: 600;
+        font-size: 1rem;
+        background: transparent;
+        border: 2px solid var(--color-primary);
+        color: var(--color-primary);
+        padding: 0.25rem 0.75rem;
+        border-radius: var(--border-radius);
+        cursor: pointer;
+        transition: background-color var(--transition-speed),
+          color var(--transition-speed), transform var(--transition-speed);
+        user-select: none;
+        white-space: nowrap;
+      }
+      .answer-clear-button:hover,
+      .answer-clear-button:focus-visible {
+        background-color: var(--color-primary);
+        color: #fff;
+        outline: none;
+        transform: scale(1.05);
+      }
+      .answer-item {
+        background: white;
+        border-radius: 0.5rem;
+        padding: 1rem 1.25rem;
+        margin-bottom: 1rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        font-size: 1rem;
+        color: var(--color-heading);
+        white-space: pre-wrap;
+        user-select: text;
+      }
+      .answer-image {
+        max-width: 100%;
+        height: auto;
+        border-radius: 0.5rem;
+        margin-top: 0.75rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        user-select: none;
+      }
+      .success-message {
+        margin-top: 1rem;
+        background-color: #d1fae5;
+        color: #065f46;
+        border-radius: var(--border-radius);
+        padding: 1rem 1.5rem;
+        font-weight: 600;
+        border: 1px solid #10b981;
+        box-shadow: 0 4px 10px rgba(16, 185, 129, 0.2);
+        user-select: none;
+      }
+      /* Password modal styling */
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.45);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 200;
+      }
+      .modal {
+        background: white;
+        border-radius: var(--border-radius);
+        padding: 2rem 2.5rem;
+        max-width: 400px;
+        width: 90%;
+        box-shadow: 0 8px 24px var(--shadow-light);
+        box-sizing: border-box;
+        text-align: center;
+      }
+      .modal h3 {
+        font-weight: 700;
+        font-size: 1.75rem;
+        color: var(--color-heading);
+        margin-bottom: 1rem;
+      }
+      .modal label {
+        display: block;
+        text-align: left;
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+        color: var(--color-heading);
+      }
+      .modal input[type="password"] {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+        border: 1px solid #d1d5db;
+        border-radius: 0.5rem;
+        margin-bottom: 1.25rem;
+        box-sizing: border-box;
+        transition: border-color var(--transition-speed),
+          box-shadow var(--transition-speed);
+      }
+      .modal input[type="password"]:focus {
+        border-color: var(--color-primary);
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+        outline-color: var(--color-primary);
+      }
+      .modal button {
+        background-color: var(--color-primary);
+        border: none;
+        color: #fff;
+        padding: 0.75rem 2rem;
+        font-weight: 700;
+        font-size: 1.125rem;
+        border-radius: var(--border-radius);
+        cursor: pointer;
+        transition: background-color var(--transition-speed),
+          transform var(--transition-speed);
+        user-select: none;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+      }
+      .modal button:hover,
+      .modal button:focus-visible {
+        background-color: var(--color-primary-hover);
+        transform: scale(1.05);
+        outline: none;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+      @media (max-width: 640px) {
+        .hero h1 {
+          font-size: 2.75rem;
+        }
+        form.answer-form {
+          padding: 2rem 1.5rem;
+        }
+        form.answer-form button {
+          width: 100%;
+          text-align: center;
+        }
+        .answer-clear-button {
+          font-size: 0.9rem;
+          padding: 0.25rem 0.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="container" aria-label="Primary navigation">
+        <div class="logo" tabindex="0">RRQ zilong{Faisal}</div>
+        <div class="nav-links">
+          <a href="#answers" tabindex="0" id="view-answers-link"
+            >Lihat Jawaban</a
+          >
+          <a href="soal integral.html" tabindex="0" id="view-answers-link"
+            >Kembali</a
+          >
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <form
+        class="answer-form container"
+        id="answer-form"
+        aria-label="Answer submission form"
+        novalidate
+      >
+        <label for="file-input">Kirim jawabannya menggunakan foto saja</label>
+        <input
+          type="file"
+          id="file-input"
+          name="file"
+          accept="image/*"
+          required
+          aria-required="true"
+        />
+        <button type="submit">Kirim</button>
+        <div
+          role="alert"
+          class="success-message"
+          id="success-message"
+          style="display: none"
+        >
+          Terimakasih sudah menjawab.
+        </div>
+      </form>
+    </main>
+
+    <section
+      class="section-container container"
+      id="answers-section"
+      aria-live="polite"
+      aria-label="Submitted answers"
+      style="display: none"
+    >
+      <h2>
+        Submitted Answers
+        <button
+          type="button"
+          class="answer-clear-button"
+          id="clear-answers-btn"
+          aria-label="Clear all submitted answers"
+        >
+          Clear All Answers
+        </button>
+      </h2>
+      <div id="answer-list" tabindex="0" aria-relevant="additions"></div>
+    </section>
+
+    <!-- Password modal -->
+    <div
+      class="modal-overlay"
+      id="password-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+      style="display: none"
+    >
+      <div class="modal">
+        <h3 id="modal-title">Hanya atmin yang bisa akses der</h3>
+        <form id="password-form" aria-label="Password form">
+          <label for="password-input">Password</label>
+          <input
+            type="password"
+            id="password-input"
+            name="password"
+            autocomplete="current-password"
+            required
+            aria-required="true"
+          />
+          <button type="submit">Masuk</button>
+          <div
+            role="alert"
+            id="password-error"
+            style="
+              color: #b91c1c;
+              font-weight: 600;
+              margin-top: 0.5rem;
+              display: none;
+            "
+          >
+            Incorrect password, please try again.
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        const form = document.getElementById("answer-form");
+        const fileInput = document.getElementById("file-input");
+        const successMessage = document.getElementById("success-message");
+        const answerSection = document.getElementById("answers-section");
+        const answerList = document.getElementById("answer-list");
+        const clearBtn = document.getElementById("clear-answers-btn");
+        const viewAnswersLink = document.getElementById("view-answers-link");
+
+        const passwordModal = document.getElementById("password-modal");
+        const passwordForm = document.getElementById("password-form");
+        const passwordInput = document.getElementById("password-input");
+        const passwordError = document.getElementById("password-error");
+
+        const STORAGE_KEY = "submittedAnswersWithImages";
+
+        // Set your access password here - change this to your desired password
+        const ACCESS_PASSWORD = "corrycantik1729"; // <-- Change password here
+
+        let answers = [];
+        let isUnlocked = false;
+
+        // Load stored answers from localStorage on page load
+        const storedAnswers = localStorage.getItem(STORAGE_KEY);
+        answers = storedAnswers ? JSON.parse(storedAnswers) : [];
+
+        // Render answers to the answer list
+        function renderAnswers() {
+          answerList.innerHTML = "";
+          if (answers.length === 0) {
+            answerList.innerHTML =
+              '<p style="color:#6b7280;">No answers submitted yet.</p>';
+            clearBtn.disabled = true;
+            clearBtn.style.opacity = "0.5";
+            clearBtn.style.cursor = "not-allowed";
+            return;
+          }
+          clearBtn.disabled = false;
+          clearBtn.style.opacity = "1";
+          clearBtn.style.cursor = "pointer";
+
+          answers.forEach((item, i) => {
+            const container = document.createElement("div");
+            container.className = "answer-item";
+
+            if (item.dataUrl) {
+              const img = document.createElement("img");
+              img.src = item.dataUrl;
+              img.alt = `Submitted image ${i + 1}`;
+              img.className = "answer-image";
+              container.appendChild(img);
+            }
+            if (item.name) {
+              const caption = document.createElement("div");
+              caption.textContent = item.name;
+              caption.style.marginTop = "0.5rem";
+              caption.style.fontSize = "0.9rem";
+              caption.style.color = "#6b7280";
+              container.appendChild(caption);
+            }
+            answerList.appendChild(container);
+          });
+        }
+
+        // Initial state: hide answers and modal
+        answerSection.style.display = "none";
+        passwordModal.style.display = "none";
+
+        // Submit handler: save image to localStorage then re-render answers if unlocked
+        form.addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const file = fileInput.files[0];
+          if (!file) {
+            fileInput.focus();
+            return;
+          }
+          if (!file.type.startsWith("image/")) {
+            alert("Please upload a valid image file.");
+            fileInput.value = "";
+            return;
+          }
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            const dataUrl = e.target.result;
+            const item = {
+              name: file.name,
+              dataUrl: dataUrl,
+            };
+            answers.unshift(item);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(answers));
+            if (isUnlocked) {
+              renderAnswers();
+            }
+            successMessage.style.display = "block";
+            fileInput.value = "";
+            fileInput.focus();
+            setTimeout(() => {
+              successMessage.style.display = "none";
+            }, 3000);
+          };
+          reader.readAsDataURL(file);
+        });
+
+        // Clear all answers
+        clearBtn.addEventListener("click", function () {
+          if (
+            confirm(
+              "Are you sure you want to clear all submitted answers? This action cannot be undone."
+            )
+          ) {
+            answers = [];
+            localStorage.removeItem(STORAGE_KEY);
+            renderAnswers();
+          }
+        });
+
+        // View Answers link: show password modal if locked else show answers
+        viewAnswersLink.addEventListener("click", (event) => {
+          event.preventDefault();
+          if (isUnlocked) {
+            if (answerSection.style.display === "none") {
+              answerSection.style.display = "block";
+              answerSection.scrollIntoView({ behavior: "smooth" });
+            }
+          } else {
+            passwordError.style.display = "none";
+            passwordInput.value = "";
+            passwordModal.style.display = "flex";
+            passwordInput.focus();
+          }
+        });
+
+        // Close modal on clicking outside or escape key
+        window.addEventListener("click", (e) => {
+          if (e.target === passwordModal) {
+            passwordModal.style.display = "none";
+            passwordError.style.display = "none";
+          }
+        });
+        window.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && passwordModal.style.display === "flex") {
+            passwordModal.style.display = "none";
+            passwordError.style.display = "none";
+          }
+        });
+
+        // Password submit handler
+        passwordForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const entered = passwordInput.value;
+          if (entered === ACCESS_PASSWORD) {
+            isUnlocked = true;
+            passwordModal.style.display = "none";
+            renderAnswers();
+            answerSection.style.display = "block";
+            answerSection.scrollIntoView({ behavior: "smooth" });
+          } else {
+            passwordError.style.display = "block";
+            passwordInput.select();
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Get Started - AwesomeSite</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --color-primary: #6a11cb;
+        --color-secondary: #2575fc;
+        --color-light: #f0f0f7;
+        --color-dark: #1a202c;
+        --font-family: "Poppins", sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: var(--font-family);
+        background: var(--color-light);
+        color: var(--color-dark);
+        line-height: 1.6;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      header {
+        position: fixed;
+        width: 100%;
+        background: white;
+        box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+        z-index: 1000;
+      }
+      nav {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .logo {
+        font-weight: 700;
+        font-size: 1.5rem;
+        background: linear-gradient(
+          45deg,
+          var(--color-primary),
+          var(--color-secondary)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        cursor: pointer;
+      }
+      nav ul {
+        list-style: none;
+        display: flex;
+        gap: 1.8rem;
+      }
+      nav ul li {
+        font-weight: 600;
+        font-size: 1rem;
+        color: var(--color-dark);
+        cursor: pointer;
+        position: relative;
+        padding-bottom: 4px;
+        transition: color 0.3s ease;
+      }
+      nav ul li::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background: var(--color-primary);
+        transition: width 0.3s ease;
+        border-radius: 2px;
+      }
+      nav ul li:hover,
+      nav ul li:focus {
+        color: var(--color-primary);
+        outline: none;
+      }
+      nav ul li:hover::after,
+      nav ul li:focus::after {
+        width: 100%;
+      }
+      main {
+        margin-top: 80px;
+        flex-grow: 1;
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 2rem;
+      }
+      h1 {
+        text-align: center;
+        color: var(--color-primary);
+        font-size: 2.8rem;
+        margin-bottom: 1rem;
+        font-weight: 700;
+      }
+      p.intro {
+        text-align: center;
+        font-size: 1.2rem;
+        color: #4a5568;
+        max-width: 600px;
+        margin: 0 auto 3rem auto;
+        line-height: 1.5;
+        user-select: text;
+      }
+      .steps {
+        display: flex;
+        gap: 2rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .step {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgb(101 64 233 / 0.1);
+        padding: 2rem 1.5rem;
+        width: 280px;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        user-select: none;
+        cursor: default;
+      }
+      .step:hover,
+      .step:focus-within {
+        box-shadow: 0 15px 40px rgb(101 64 233 / 0.2);
+        transform: translateY(-10px);
+        outline: none;
+      }
+      .step-icon {
+        font-size: 3.5rem;
+        color: var(--color-primary);
+        margin-bottom: 1.2rem;
+      }
+      .step-title {
+        font-weight: 700;
+        font-size: 1.4rem;
+        margin-bottom: 0.7rem;
+        color: var(--color-dark);
+      }
+      .step-desc {
+        font-size: 1rem;
+        color: #4a5568;
+        line-height: 1.5;
+      }
+      .back-button {
+        display: block;
+        max-width: 200px;
+        margin: 3rem auto 0 auto;
+        padding: 0.9rem 2rem;
+        font-weight: 600;
+        border-radius: 50px;
+        background: var(--color-primary);
+        color: white;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 8px 15px rgb(101 64 233 / 0.7);
+        transition: background-color 0.3s ease;
+        text-align: center;
+        text-decoration: none;
+        user-select: none;
+      }
+      .back-button:hover,
+      .back-button:focus {
+        background: var(--color-secondary);
+        outline: none;
+      }
+      footer {
+        background: var(--color-dark);
+        color: #a0aec0;
+        text-align: center;
+        padding: 1.5rem 2rem;
+        font-size: 0.9rem;
+        margin-top: auto;
+      }
+      footer a {
+        color: #a0aec0;
+        margin: 0 0.8rem;
+        font-size: 1.4rem;
+        vertical-align: middle;
+        transition: color 0.3s ease;
+      }
+      footer a:hover,
+      footer a:focus {
+        color: var(--color-secondary);
+        outline: none;
+      }
+      @media (max-width: 600px) {
+        .steps {
+          flex-direction: column;
+          align-items: center;
+        }
+        main {
+          padding: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav role="navigation" aria-label="Main Navigation">
+        <div
+          class="logo"
+          aria-label="Website Logo"
+          tabindex="0"
+          onclick="location.href='home.html'"
+        >
+          Ical Math
+        </div>
+        <ul>
+          <li tabindex="0">
+            <a href="buatakun.html">Buat akun</a>
+          </li>
+          <li tabindex="0"><a href="mtk.html">About</a></li>
+          <li tabindex="0"><a href="mtk.html">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <h1>RRQ Zilong {Corry}</h1>
+      <p class="intro">
+        saya menyediakan beberapa contoh soal untuk menjelang uts Matematika.
+      </p>
+
+      <div class="steps" role="list" aria-label="Getting Started Steps">
+        <a href="home.html"
+          ><article class="step" role="listitem" tabindex="0">
+            <div class="step-icon" aria-hidden="true">📝</div>
+            <h2 class="step-title">Kumpulan Soal soal beserta jawaban</h2>
+            <p class="step-desc">MASIH DALAM UJI COBA.</p>
+          </article>
+        </a>
+        <a href="game.html"
+          ><article class="step" role="listitem" tabindex="0">
+            <div class="step-icon" aria-hidden="true">🎮</div>
+            <h2 class="step-title">Game</h2>
+            <p class="step-desc">yuk kerjain quiz untuk menambah wawasan.</p>
+          </article></a
+        >
+
+        <a href="kalkulator.html"
+          ><article class="step" role="listitem" tabindex="0">
+            <div class="step-icon" aria-hidden="true">🧮</div>
+            <h2 class="step-title">Calculator</h2>
+            <p class="step-desc">
+              Calculator buatan untuk mempermudah turunan.
+            </p>
+          </article></a
+        >
+
+        <a href="materi.html"
+          ><article class="step" role="listitem" tabindex="0">
+            <div class="step-icon" aria-hidden="true">📚</div>
+            <h2 class="step-title">Materi</h2>
+            <p class="step-desc">Kumpulan materi materi dasar.</p>
+          </article></a
+        >
+      </div>
+
+      <a href="index.html" class="back-button" aria-label="Back to home page"
+        >Back to Home</a
+      >
+    </main>
+
+    <footer>
+      &copy; BY: MUHAMMAD FAISAL 2025·
+      <a
+        href="https://twitter.com"
+        target="_blank"
+        rel="noopener"
+        aria-label="Twitter Link"
+        tabindex="0"
+        >🐦</a
+      >
+      <a
+        href="https://facebook.com"
+        target="_blank"
+        rel="noopener"
+        aria-label="Facebook Link"
+        tabindex="0"
+        >📘</a
+      >
+      <a
+        href="https://instagram.com"
+        target="_blank"
+        rel="noopener"
+        aria-label="Instagram Link"
+        tabindex="0"
+        >📸</a
+      >
+    </footer>
+  </body>
+</html>

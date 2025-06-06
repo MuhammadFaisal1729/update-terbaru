@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Contoh Soal Turunan - Materi Matematika</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+  :root {
+    --primary-color: #2563eb;
+    --secondary-color: #14b8a6;
+    --background-color: #f3f4f6;
+    --text-color: #1e293b;
+    --header-bg: #1e40af;
+    --header-text: #f9fafb;
+    --card-bg: white;
+    --card-shadow: rgba(37, 99, 235, 0.15);
+    --btn-bg: #3b82f6;
+    --btn-hover-bg: #2563eb;
+    --answer-bg: #d1fae5;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+  }
+
+  header {
+    background-color: var(--header-bg);
+    color: var(--header-text);
+    padding: 1.8rem 2rem;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+
+  header h1 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 600;
+  }
+
+  main {
+    max-width: 900px;
+    margin: 2rem auto 3rem auto;
+    padding: 0 1rem;
+  }
+
+  section {
+    background: var(--card-bg);
+    box-shadow: 0 8px 24px var(--card-shadow);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    transition: transform 0.3s ease;
+  }
+  section:hover {
+    transform: translateY(-5px);
+  }
+
+  h2 {
+    font-size: 1.6rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+  }
+
+  .question {
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
+
+  .answer {
+    background-color: var(--answer-bg);
+    border-left: 5px solid var(--secondary-color);
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1.05rem;
+    display: none;
+    white-space: pre-line;
+  }
+
+  .show-answer-btn {
+    background-color: var(--btn-bg);
+    color: white;
+    border: none;
+    padding: 0.55rem 1.3rem;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 1rem;
+  }
+  .show-answer-btn:hover {
+    background-color: var(--btn-hover-bg);
+  }
+
+  footer {
+    text-align: center;
+    color: #475569;
+    font-size: 0.9rem;
+    padding: 1rem 2rem;
+    border-top: 1px solid #e2e8f0;
+  }
+
+  @media (max-width: 600px) {
+    header h1 {
+      font-size: 1.5rem;
+    }
+    main {
+      margin: 1.5rem 1rem 2rem 1rem;
+    }
+    section {
+      padding: 1.5rem 1rem;
+    }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Contoh Soal Turunan</h1>
+</header>
+<main>
+  <section>
+    <h2>Soal 1</h2>
+    <div class="question">Hitung turunan fungsi: <code>f(x) = 4x^3 + 7x^2 - 5x + 8</code></div>
+    <button class="show-answer-btn">Tampilkan Jawaban</button>
+    <div class="answer">
+f'(x) = 12x^2 + 14x - 5
+
+Penjelasan langkah:
+- Turunan dari 4x³ adalah 4 × 3 x² = 12x²
+- Turunan dari 7x² adalah 7 × 2 x¹ = 14x
+- Turunan dari -5x adalah -5
+- Turunan dari 8 (konstanta) adalah 0
+Jadi, f'(x) = 12x² + 14x - 5
+    </div>
+  </section>
+
+  <section>
+    <h2>Soal 2</h2>
+    <div class="question">Turunkan fungsi berikut: <code>g(x) = 5x^4 - 3x^3 + x - 10</code></div>
+    <button class="show-answer-btn">Tampilkan Jawaban</button>
+    <div class="answer">
+g'(x) = 20x^3 - 9x^2 + 1
+
+Langkah-langkah:
+- Turunan 5x⁴ adalah 5 × 4 x³ = 20x³
+- Turunan -3x³ adalah -3 × 3 x² = -9x²
+- Turunan x adalah 1
+- Turunan -10 adalah 0
+Jadi, g'(x) = 20x³ - 9x² + 1
+    </div>
+  </section>
+
+  <section>
+    <h2>Soal 3</h2>
+    <div class="question">Hitung turunan fungsi: <code>h(x) = (3x^2 + 1)(x^3 - 4x)</code></div>
+    <button class="show-answer-btn">Tampilkan Jawaban</button>
+    <div class="answer">
+Gunakan aturan produk:
+h'(x) = f'(x)g(x) + f(x)g'(x)
+
+Misal:
+f(x) = 3x^2 + 1 → f'(x) = 6x
+g(x) = x^3 - 4x → g'(x) = 3x^2 - 4
+
+Jadi:
+h'(x) = (6x)(x^3 -4x) + (3x^2 + 1)(3x^2 - 4)
+
+= 6x^4 - 24x^2 + 9x^4 - 12x^2 + 3x^2 - 4
+
+= (6x^4 + 9x^4) + (-24x^2 -12x^2 + 3x^2) - 4
+
+= 15x^4 - 33x^2 -4
+    </div>
+  </section>
+
+  <section>
+    <h2>Soal 4</h2>
+    <div class="question">Turunkan fungsi: <code>j(x) = \(\frac{2x^3 - 5}{x^2 + 1}\)</code></div>
+    <button class="show-answer-btn">Tampilkan Jawaban</button>
+    <div class="answer">
+Gunakan aturan pembagian:
+j'(x) = \(\frac{f'(x)g(x) - f(x)g'(x)}{(g(x))^2}\)
+
+Misal:
+f(x) = 2x^3 - 5 → f'(x) = 6x^2
+g(x) = x^2 + 1 → g'(x) = 2x
+
+Jadi:
+j'(x) = (6x^2)(x^2 + 1) - (2x^3 - 5)(2x) / (x^2 + 1)^2
+
+= (6x^4 + 6x^2) - (4x^4 - 10x) / (x^2 + 1)^2
+
+= (6x^4 + 6x^2 - 4x^4 + 10x) / (x^2 + 1)^2
+
+= (2x^4 + 6x^2 + 10x) / (x^2 + 1)^2
+    </div>
+  </section>
+
+  <section>
+    <h2>Soal 5</h2>
+    <div class="question">Hitung turunan fungsi: <code>k(x) = e^x + 3x^5</code></div>
+    <button class="show-answer-btn">Tampilkan Jawaban</button>
+    <div class="answer">
+Turunan fungsi eksponensial dan pangkat:
+
+k'(x) = e^x + 15x^4
+
+Penjelasan:
+- Turunan dari e^x adalah e^x
+- Turunan dari 3x^5 adalah 15x^4 (3 × 5 x^4)
+    </div>
+  </section>
+</main>
+<footer>
+  &copy; 2024 Contoh Soal Turunan - dibuat oleh BLACKBOXAI
+</footer>
+<script>
+  document.querySelectorAll('.show-answer-btn').forEach(button => {
+    button.addEventListener('click', () => {
+      const answerDiv = button.nextElementSibling;
+      if (answerDiv.style.display === 'block') {
+        answerDiv.style.display = 'none';
+        button.textContent = 'Tampilkan Jawaban';
+      } else {
+        answerDiv.style.display = 'block';
+        button.textContent = 'Sembunyikan Jawaban';
+      }
+    });
+  });
+</script>
+</body>
+</html>

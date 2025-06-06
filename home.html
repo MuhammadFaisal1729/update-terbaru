@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Exam & Study Material Gallery</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary-color: #4f46e5;
+        --secondary-color: #818cf8;
+        --background-color: #f9fafb;
+        --text-color: #111827;
+        --card-bg: white;
+        --border-radius: 12px;
+        --shadow-color: rgba(79, 70, 229, 0.2);
+        --font-family: "Poppins", sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: var(--font-family);
+        background-color: var(--background-color);
+        color: var(--text-color);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+      }
+      header {
+        width: 100%;
+        max-width: 1100px;
+        margin-bottom: 30px;
+        text-align: center;
+      }
+      header h1 {
+        font-size: 2.6rem;
+        color: var(--primary-color);
+        font-weight: 700;
+        margin: 0;
+      }
+      header p {
+        color: var(--secondary-color);
+        font-size: 1.1rem;
+        margin-top: 6px;
+        font-weight: 500;
+      }
+      main {
+        max-width: 1100px;
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 24px;
+        padding-bottom: 40px;
+      }
+      .card {
+        background: var(--card-bg);
+        border-radius: var(--border-radius);
+        box-shadow: 0 10px 20px var(--shadow-color);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .card:hover,
+      .card:focus-within {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px var(--shadow-color);
+        outline: none;
+        cursor: pointer;
+      }
+      .card img {
+        width: 100%;
+        height: 200px;
+        object-fit: contain;
+        background: #fafafa;
+        border-bottom: 1px solid #ddd;
+      }
+      .card-content {
+        padding: 15px 20px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .card-title {
+        font-weight: 600;
+        font-size: 1.15rem;
+        margin: 0 0 8px 0;
+        color: var(--primary-color);
+      }
+      .card-description {
+        color: #4b5563;
+        font-size: 0.95rem;
+        margin: 0;
+        flex-grow: 1;
+      }
+      /* Modal Styles */
+      .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.75);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+      }
+      .modal.show {
+        display: flex;
+      }
+      .modal-content {
+        max-width: 90vw;
+        max-height: 90vh;
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .modal-content img {
+        max-width: 100%;
+        max-height: 80vh;
+        object-fit: contain;
+        display: block;
+      }
+      .modal-caption {
+        padding: 12px 20px;
+        font-weight: 600;
+        font-size: 1rem;
+        color: var(--primary-color);
+        text-align: center;
+        background: #f0f0ff;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      .modal-close {
+        position: absolute;
+        top: 10px;
+        right: 14px;
+        font-size: 2rem;
+        background: none;
+        border: none;
+        color: var(--primary-color);
+        cursor: pointer;
+        user-select: none;
+        font-weight: 700;
+        line-height: 1;
+      }
+      .modal-close:hover,
+      .modal-close:focus {
+        color: var(--secondary-color);
+        outline: none;
+      }
+      @media (max-width: 600px) {
+        header h1 {
+          font-size: 2rem;
+        }
+        main {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>kumpulan Soal soal der</h1>
+      <p>maaf kalo ada typo, atmin juga manusia.</p>
+    </header>
+
+    <main role="list">
+      <a href="soalmtk.html"
+        ><article
+          tabindex="0"
+          role="listitem"
+          class="card"
+          aria-label="Soal Ujian Matematika 1"
+        >
+          <img src="matematika logo.png" alt="Soal Ujian Matematika 1" />
+          <div class="card-content">
+            <h2 class="card-title">Soal Turunan</h2>
+            <p class="card-description">Contoh soal Matematika adik adik.</p>
+          </div>
+        </article></a
+      >
+
+      <a href="soal integral.html"
+        ><article
+          tabindex="0"
+          role="listitem"
+          class="card"
+          aria-label="Soal Fisika Dasar"
+        >
+          <img src="integral logo.webp" alt="Soal Fisika Dasar" />
+          <div class="card-content">
+            <h2 class="card-title">Soal Integral</h2>
+            <p class="card-description">Soal Integral dasar.</p>
+          </div>
+        </article></a
+      >
+
+      <article
+        tabindex="0"
+        role="listitem"
+        class="card"
+        aria-label="Materi Bahasa Indonesia"
+      >
+        <img src="coming soon.jpeg" alt="Materi Bahasa Indonesia" />
+        <div class="card-content">
+          <h2 class="card-title">Materi Bahasa Indonesia</h2>
+          <p class="card-description">coming soon</p>
+        </div>
+      </article>
+
+      <article
+        tabindex="0"
+        role="listitem"
+        class="card"
+        aria-label="Soal Kimia Organik"
+      >
+        <img src="coming soon.jpeg" alt="Soal Kimia Organik" />
+        <div class="card-content">
+          <h2 class="card-title">Soal Kimia Organik</h2>
+          <p class="card-description">coming soon.</p>
+        </div>
+      </article>
+    </main>
+
+    <!-- Modal to show full image -->
+    <div
+      class="modal"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Full size image view"
+    >
+      <div class="modal-content">
+        <button class="modal-close" aria-label="Close full image view">
+          &times;
+        </button>
+        <img src="" alt="" id="modalImage" />
+        <div class="modal-caption" id="modalCaption"></div>
+      </div>
+    </div>
+
+    <script>
+      const cards = document.querySelectorAll(".card");
+      const modal = document.querySelector(".modal");
+      const modalImage = document.getElementById("modalImage");
+      const modalCaption = document.getElementById("modalCaption");
+      const modalCloseBtn = document.querySelector(".modal-close");
+
+      cards.forEach((card) => {
+        card.addEventListener("click", () => {
+          const img = card.querySelector("img");
+          modalImage.src = img.src;
+          modalImage.alt = img.alt;
+          modalCaption.textContent =
+            card.querySelector(".card-title").textContent;
+          modal.classList.add("show");
+          modalCloseBtn.focus();
+        });
+        card.addEventListener("keypress", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            card.click();
+          }
+        });
+      });
+
+      modalCloseBtn.addEventListener("click", () => {
+        modal.classList.remove("show");
+        modalImage.src = "";
+        modalCaption.textContent = "";
+      });
+
+      // Close modal on ESC key
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && modal.classList.contains("show")) {
+          modalCloseBtn.click();
+        }
+      });
+
+      // Close modal when clicking outside modal content
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) {
+          modalCloseBtn.click();
+        }
+      });
+    </script>
+  </body>
+</html>
